@@ -1,10 +1,10 @@
 local util = AdvancedFilters.util
 
-local function GetFilterCallbackForCraftableMotif()
+local function GetFilterCallbackForUnknownMotif()
     return function(slot)
         local itemLink = util.GetItemLink(slot)
 
-        return util.LibMotifCategories:IsMotifCraftable(itemLink)
+        return not util.LibMotifCategories:IsMotifKnown(itemLink)
     end
 end
 
@@ -17,7 +17,7 @@ local function GetFilterCallbackForKnownMotif()
 end
 
 local dropdownCallbacks = {
-    [1] = {name = "CraftableMotif", filterCallback = GetFilterCallbackForCraftableMotif()},
+    [1] = {name = "UnknownMotif", filterCallback = GetFilterCallbackForUnknownMotif()},
     [2] = {name = "KnownMotif", filterCallback = GetFilterCallbackForKnownMotif()},
 }
 
@@ -27,7 +27,7 @@ local styleDropdownCallbacks = {
 
 local strings = {
     ["MotifKnowledge"] = "Motif Knowledge",
-    ["CraftableMotif"] = "Craftable Motif",
+    ["UnknownMotif"] = "Unknown Motif",
     ["KnownMotif"] = "Known Motif",
 }
 
